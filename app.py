@@ -31,11 +31,11 @@ print("Loaded GOOGLE_API_KEY:", bool(os.getenv('GOOGLE_API_KEY')))
 limiter = Limiter(
     app=app,
     key_func=get_remote_address,
-    storage_uri="redis://your-redis-url-from-render",  # For production
+    storage_uri="memory://",  # For production
     # storage_uri="file:///tmp/flask_limiter"  # For development
     default_limits=["200 per day", "50 per hour"]
 )
-
+limiter = Limiter(enabled=False)
 model=genai.GenerativeModel('gemini-1.5-flash')
 
 # Configure Gemini AI
