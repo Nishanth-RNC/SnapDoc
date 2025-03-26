@@ -4,5 +4,4 @@ python-dotenv
 flask-limiter
 google-generativeai
 itsdangerous
-smtplib
 twilio
