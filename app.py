@@ -29,13 +29,10 @@ load_dotenv()
 print("Loaded GOOGLE_API_KEY:", bool(os.getenv('GOOGLE_API_KEY')))
 
 limiter = Limiter(
-    app=app,
-    key_func=get_remote_address,
-    storage_uri="memory://",  # For production
-    # storage_uri="file:///tmp/flask_limiter"  # For development
-    default_limits=["200 per day", "50 per hour"]
+    key_func=get_remote_address,  # Still required
+    enabled=False  # This actually disables the limiter
 )
-limiter = Limiter(enabled=False)
+
 model=genai.GenerativeModel('gemini-1.5-flash')
 
 # Configure Gemini AI
