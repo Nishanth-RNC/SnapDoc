@@ -1,0 +1,220 @@
+{% extends "base.html" %}
+
+{% block extra_css %}
+<style>
+    .dashboard-header {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: white;
+        padding: 2rem;
+        border-radius: 15px;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .dashboard-header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 150px;
+        height: 150px;
+        background: url('/static/images/medical-icon.png') no-repeat;
+        background-size: contain;
+        opacity: 0.1;
+    }
+    
+    .welcome-message {
+        position: relative;
+        z-index: 1;
+    }
+    
+    .dashboard-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+        margin: 1.5rem 0;
+        color: var(--primary);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .doctor-card {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        transition: transform 0.3s ease;
+        border-left: 4px solid var(--secondary);
+    }
+    
+    .doctor-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    }
+    
+    .doctor-name {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+        color: var(--primary);
+    }
+    
+    .doctor-specialty {
+        display: inline-block;
+        background: #e3f2fd;
+        color: var(--primary);
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        margin-bottom: 10px;
+    }
+    
+    .doctor-details {
+        margin: 15px 0;
+    }
+    
+    .doctor-details p {
+        margin: 5px 0;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    .appointment-card {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        margin-bottom: 1rem;
+        border-left: 4px solid var(--accent);
+    }
+    
+    .appointment-status {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+    
+    .confirmed {
+        background: #d4edda;
+        color: #155724;
+    }
+    
+    .declined {
+        background: #f8d7da;
+        color: #721c24;
+    }
+    
+    .action-buttons {
+        margin-top: 15px;
+        display: flex;
+        gap: 10px;
+    }
+    
+    .chatbot-button {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 70px;
+        height: 70px;
+        background: var(--accent);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        transition: all 0.3s ease;
+        z-index: 100;
+        text-decoration: none;
+    }
+    
+    .chatbot-button:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <div class="welcome-message">
+        <h1><i class="fas fa-user"></i> Patient Dashboard</h1>
+        <p>Welcome back! Here's your health overview</p>
+    </div>
+</div>
+
+<h2 class="section-title"><i class="fas fa-user-md"></i> Available Doctors</h2>
+<div class="dashboard-grid">
+    {% for doctor in doctors %}
+    <div class="doctor-card">
+        <div class="doctor-name">{{ doctor.username }}</div>
+        <span class="doctor-specialty">{{ doctor.specialization }}</span>
+        <div class="doctor-details">
+            <p><i class="fas fa-briefcase"></i> {{ doctor.experience }} years experience</p>
+            <p><i class="fas fa-chart-line"></i> {{ doctor.success_rate }}% success rate</p>
+            <p><i class="fas fa-map-marker-alt"></i> {{ doctor.city }}, {{ doctor.state }}</p>
+        </div>
+        <a href="{{ url_for('book_slot', doctor_id=doctor.id) }}" class="btn btn-primary">
+            <i class="fas fa-calendar-plus"></i> Book Appointment
+        </a>
+    </div>
+    {% endfor %}
+</div>
+
+<h2 class="section-title"><i class="fas fa-calendar-check"></i> Confirmed Appointments</h2>
+{% if confirmed_appointments %}
+    {% for appointment in confirmed_appointments %}
+    <div class="appointment-card">
+        <span class="appointment-status confirmed">Confirmed</span>
+        <p><i class="fas fa-clock"></i> <strong>Date:</strong> {{ appointment.slot }}</p>
+        <p><i class="fas fa-user-md"></i> <strong>Doctor:</strong> {{ appointment.doctor_name }}</p>
+        <p><i class="fas fa-map-marker-alt"></i> <strong>Location:</strong> {{ appointment.city }}</p>
+        <div class="action-buttons">
+            <a href="{{ url_for('cancel_appointment', appointment_id=appointment.id) }}" class="btn btn-outline" style="color: var(--danger); border-color: var(--danger);">
+                <i class="fas fa-times"></i> Cancel
+            </a>
+            <a href="https://www.google.com/maps/dir/?api=1&destination={{ appointment.doctor_name }}, {{ appointment.city }}" 
+               target="_blank" class="btn btn-secondary">
+                <i class="fas fa-directions"></i> Directions
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+{% else %}
+    <div class="card">
+        <p>No confirmed appointments found.</p>
+    </div>
+{% endif %}
+
+<h2 class="section-title"><i class="fas fa-calendar-times"></i> Declined Appointments</h2>
+{% if declined_appointments %}
+    {% for appointment in declined_appointments %}
+    <div class="appointment-card">
+        <span class="appointment-status declined">Declined</span>
+        <p><i class="fas fa-clock"></i> <strong>Date:</strong> {{ appointment.slot }}</p>
+        <p><i class="fas fa-user-md"></i> <strong>Doctor:</strong> {{ appointment.doctor_name }}</p>
+    </div>
+    {% endfor %}
+{% else %}
+    <div class="card">
+        <p>No declined appointments found.</p>
+    </div>
+{% endif %}
+
+<a href="{{ url_for('chatbot') }}" class="chatbot-button">
+    <i class="fas fa-robot"></i>
+</a>
+{% endblock %}

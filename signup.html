@@ -1,0 +1,266 @@
+{% extends "base.html" %}
+
+{% block extra_js %}
+<script>
+    // Load states and cities from the JSON file
+    let statesAndCities = {};
+
+    // Fetch the JSON file containing states and cities
+    fetch('/static/states_and_cities.json')
+        .then(response => response.json())
+        .then(data => {
+            statesAndCities = data;
+            populateStates();
+        })
+        .catch(error => console.error('Error loading states and cities:', error));
+
+    // Populate the state dropdown
+    function populateStates() {
+        const stateSelect = document.getElementById('state');
+        stateSelect.innerHTML = '<option value="">Select State</option>';
+        for (const state in statesAndCities) {
+            const option = document.createElement('option');
+            option.value = state;
+            option.textContent = state;
+            stateSelect.appendChild(option);
+        }
+    }
+
+    // Populate the city dropdown based on the selected state
+    function populateCities() {
+        const stateSelect = document.getElementById('state');
+        const citySelect = document.getElementById('city');
+        const selectedState = stateSelect.value;
+
+        citySelect.innerHTML = '<option value="">Select City</option>';
+
+        if (selectedState && statesAndCities[selectedState]) {
+            statesAndCities[selectedState].forEach(city => {
+                const option = document.createElement('option');
+                option.value = city;
+                option.textContent = city;
+                citySelect.appendChild(option);
+            });
+        }
+    }
+
+    // Toggle doctor-specific fields
+    function toggleDoctorFields() {
+        const role = document.getElementById('role').value;
+        const doctorFields = document.getElementById('doctor-fields');
+        doctorFields.style.display = role === 'doctor' ? 'block' : 'none';
+    }
+
+    // Format phone number input
+    function formatPhoneNumber(input) {
+        // Remove all non-digit characters
+        let phoneNumber = input.value.replace(/\D/g, '');
+
+        // Ensure the number starts with +91
+        if (!phoneNumber.startsWith('91')) {
+            phoneNumber = '91' + phoneNumber;
+        }
+
+        // Add space after +91 and after the first 5 digits
+        if (phoneNumber.length > 2) {
+            phoneNumber = '+91 ' + phoneNumber.slice(2);
+        }
+        if (phoneNumber.length > 8) {
+            phoneNumber = phoneNumber.slice(0, 9) + ' ' + phoneNumber.slice(9);
+        }
+
+        // Limit to 10 digits (excluding +91 and spaces)
+        if (phoneNumber.replace(/\D/g, '').length > 13) {
+            phoneNumber = phoneNumber.slice(0, 15); // +91 90925 12345
+        }
+
+        // Update the input value
+        input.value = phoneNumber;
+    }
+
+    // Validate form before submission
+    function validateForm() {
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirm_password').value;
+
+        if (password !== confirmPassword) {
+            alert('Passwords do not match!');
+            return false;
+        }
+
+        // Validate success rate for doctors
+        const role = document.getElementById('role').value;
+        if (role === 'doctor') {
+            const successRate = document.getElementById('success_rate').value;
+            if (successRate < 0 || successRate > 100) {
+                alert('Success rate must be between 0% and 100%');
+                return false;
+            }
+        }
+
+        return true;
+    }
+</script>
+{% endblock %}
+
+{% block content %}
+<div style="max-width: 600px; margin: 0 auto;">
+    <div class="card">
+        <h2 style="text-align: center; margin-bottom: 25px; color: var(--primary);">
+            <i class="fas fa-user-plus"></i> Create Account
+        </h2>
+        
+        <form method="POST" onsubmit="return validateForm()">
+            <div class="form-group">
+                <label for="username" style="display: block; margin-bottom: 8px; font-weight: 500;">
+                    <i class="fas fa-user"></i> Username
+                </label>
+                <input type="text" id="username" name="username" class="form-control" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password" style="display: block; margin-bottom: 8px; font-weight: 500;">
+                    <i class="fas fa-lock"></i> Password
+                </label>
+                <input type="password" id="password" name="password" class="form-control" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="confirm_password" style="display: block; margin-bottom: 8px; font-weight: 500;">
+                    <i class="fas fa-lock"></i> Confirm Password
+                </label>
+                <input type="password" id="confirm_password" name="confirm_password" class="form-control" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="role" style="display: block; margin-bottom: 8px; font-weight: 500;">
+                    <i class="fas fa-user-tag"></i> Role
+                </label>
+                <select id="role" name="role" class="form-control" required onchange="toggleDoctorFields()">
+                    <option value="patient">Patient</option>
+                    <option value="doctor">Doctor</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="phone" style="display: block; margin-bottom: 8px; font-weight: 500;">
+                    <i class="fas fa-phone"></i> Phone Number
+                </label>
+                <input type="text" id="phone" name="phone" class="form-control" required 
+                       oninput="formatPhoneNumber(this)" maxlength="15" placeholder="+91 XXXXX XXXXX">
+            </div>
+            
+            <div class="form-group">
+                <label for="email" style="display: block; margin-bottom: 8px; font-weight: 500;">
+                    <i class="fas fa-envelope"></i> Email
+                </label>
+                <input type="email" id="email" name="email" class="form-control" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="state" style="display: block; margin-bottom: 8px; font-weight: 500;">
+                    <i class="fas fa-map-marker-alt"></i> State
+                </label>
+                <select id="state" name="state" class="form-control" required onchange="populateCities()">
+                    <option value="">Select State</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="city" style="display: block; margin-bottom: 8px; font-weight: 500;">
+                    <i class="fas fa-city"></i> City
+                </label>
+                <select id="city" name="city" class="form-control" required>
+                    <option value="">Select City</option>
+                </select>
+            </div>
+            
+            <!-- Doctor-specific fields -->
+            <div id="doctor-fields" class="doctor-fields" style="display: none; margin-top: 25px; padding-top: 25px; border-top: 1px solid #eee;">
+                <h3 style="margin-bottom: 20px; color: var(--primary);">
+                    <i class="fas fa-user-md"></i> Doctor Information
+                </h3>
+                
+                <div class="form-group">
+                    <label for="specialization" style="display: block; margin-bottom: 8px; font-weight: 500;">
+                        <i class="fas fa-stethoscope"></i> Specialization
+                    </label>
+                    <select id="specialization" name="specialization" class="form-control">
+                        <option value="">Select Specialization</option>
+                        <option value="Family Medicine">Family Medicine</option>
+                        <option value="Internal Medicine">Internal Medicine (adults)</option>
+                        <option value="Pediatrics">Pediatrics (children)</option>
+                        <option value="Obstetrics and Gynecology">Obstetrics and Gynecology (OB/GYN)</option>
+                        <option value="General Surgery">General Surgery</option>
+                        <option value="Orthopedic Surgery">Orthopedic Surgery (bones/joints)</option>
+                        <option value="Neurosurgery">Neurosurgery (brain/spine/nerves)</option>
+                        <option value="Cardiothoracic Surgery">Cardiothoracic Surgery (heart/chest)</option>
+                        <option value="Plastic and Reconstructive Surgery">Plastic and Reconstructive Surgery</option>
+                        <option value="Vascular Surgery">Vascular Surgery (blood vessels)</option>
+                        <option value="Colon and Rectal Surgery">Colon and Rectal Surgery</option>
+                        <option value="Urology">Urology (urinary tract/male reproductive system)</option>
+                        <option value="Ophthalmology">Ophthalmology (eyes)</option>
+                        <option value="Otolaryngology">Otolaryngology (ENT) (ears, nose, throat)</option>
+                        <option value="Transplant Surgery">Transplant Surgery</option>
+                        <option value="Cardiology">Cardiology (heart)</option>
+                        <option value="Dermatology">Dermatology (skin)</option>
+                        <option value="Endocrinology">Endocrinology (hormones)</option>
+                        <option value="Gastroenterology">Gastroenterology (digestive system)</option>
+                        <option value="Hematology">Hematology (blood disorders)</option>
+                        <option value="Infectious Disease">Infectious Disease</option>
+                        <option value="Nephrology">Nephrology (kidneys)</option>
+                        <option value="Oncology">Oncology (cancer)</option>
+                        <option value="Pulmonology">Pulmonology (lungs)</option>
+                        <option value="Rheumatology">Rheumatology (joints/autoimmune diseases)</option>
+                        <option value="Anesthesiology">Anesthesiology</option>
+                        <option value="Emergency Medicine">Emergency Medicine</option>
+                        <option value="Radiology">Radiology (imaging: X-ray, MRI, CT)</option>
+                        <option value="Interventional Radiology">Interventional Radiology</option>
+                        <option value="Pathology">Pathology (disease diagnosis via lab tests)</option>
+                        <option value="Nuclear Medicine">Nuclear Medicine</option>
+                        <option value="Critical Care Medicine">Critical Care Medicine (ICU)</option>
+                        <option value="Psychiatry">Psychiatry</option>
+                        <option value="Neurology">Neurology (nervous system/brain disorders)</option>
+                        <option value="Child Neurology">Child Neurology</option>
+                        <option value="Physical Medicine and Rehabilitation">Physical Medicine and Rehabilitation (PM&R)</option>
+                        <option value="Preventive Medicine">Preventive Medicine</option>
+                        <option value="Occupational Medicine">Occupational Medicine (workplace health)</option>
+                        <option value="Aerospace Medicine">Aerospace Medicine (aviation/space health)</option>
+                        <option value="Allergy and Immunology">Allergy and Immunology</option>
+                        <option value="Medical Genetics">Medical Genetics</option>
+                        <option value="Neonatology">Neonatology (newborn intensive care)</option>
+                        <option value="Palliative Care">Palliative Care (symptom relief in serious illness)</option>
+                        <option value="Sleep Medicine">Sleep Medicine</option>
+                        <option value="Sports Medicine">Sports Medicine</option>
+                        <option value="Geriatrics">Geriatrics (elderly care)</option>
+                        <option value="Bariatric Medicine">Bariatric Medicine (weight management)</option>
+                        <option value="Integrative Medicine">Integrative Medicine (holistic approaches)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="experience" style="display: block; margin-bottom: 8px; font-weight: 500;">
+                        <i class="fas fa-briefcase"></i> Experience (years)
+                    </label>
+                    <input type="number" id="experience" name="experience" class="form-control">
+                </div>
+                
+                <div class="form-group">
+                    <label for="success_rate" style="display: block; margin-bottom: 8px; font-weight: 500;">
+                        <i class="fas fa-chart-line"></i> Success Rate (%)
+                    </label>
+                    <input type="number" id="success_rate" name="success_rate" min="0" max="100" step="0.01" class="form-control">
+                </div>
+            </div>
+            
+            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px; margin-top: 20px;">
+                <i class="fas fa-user-plus"></i> Sign Up
+            </button>
+        </form>
+        
+        <div style="text-align: center; margin-top: 20px;">
+            <p>Already have an account? <a href="{{ url_for('login') }}" style="color: var(--primary);">Login here</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}
