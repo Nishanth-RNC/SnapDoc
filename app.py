@@ -76,7 +76,7 @@ Additional requirements:
 - Include age-specific warnings where relevant"""
 
 # Load states and cities
-with open(os.path.join(app.static_folder, 'states_and_cities.json'), 'r') as f:
+with open(os.path.join('states_and_cities.json'), 'r') as f:
     statesAndCities = json.load(f)
 
 # Email and SMS configuration
