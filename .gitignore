@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+pythonenv*
+
+# Database
+*.db
+*.sqlite
+*.db-journal
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# System
+.DS_Store
+Thumbs.db
+
+# Logs and runtime
+*.log
+*.pid
+*.seed
+*.pid.lock
+
+# Dependency directories
+node_modules/
+bower_components/
+
+# Build and release
+build/
+dist/
+*.egg-info/
+*.egg
+
+# Config files
+config.py
+.env
+*.env
+
+# Specific files in your project
+start.ds
+weighty
