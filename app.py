@@ -89,7 +89,7 @@ EMAIL_USER = 'hospital.app2025@gmail.com'  # Replace with your Gmail
 EMAIL_PASSWORD = os.getenv('EMAIL_PASSWORD')  # Use App Password (not regular password)
 TWILIO_ACCOUNT_SID = os.getenv('TWILIO_SID')
 TWILIO_AUTH_TOKEN = os.getenv('TWILIO_AUTH_TOKEN')
-TWILIO_PHONE_NUMBER = '+12542683423'  # Your Twilio phone number
+TWILIO_PHONE_NUMBER = os.getenv('TWILIO_NUMBER')  # Your Twilio phone number
 
 # OTP Configuration
 OTP_EXPIRATION = 300  # 5 minutes
