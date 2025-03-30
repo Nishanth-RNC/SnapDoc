@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), 
+                        url('/static/medical-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+
+        .dashboard-header {
+            background: #007bff;
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .appointments-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .appointment-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+            border-left: 4px solid #007bff;
+        }
+
+        .appointment-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .status-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .pending { background: #fff3cd; color: #856404; }
+        .confirmed { background: #d4edda; color: #155724; }
+        .cancelled { background: #f8d7da; color: #721c24; }
+
+        .action-buttons {
+            margin-top: 1rem;
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-confirm { background: #28a745; color: white; }
+        .btn-decline { background: #dc3545; color: white; }
+        .btn-cancel { background: #ffc107; color: black; }
+
+        .btn:hover {
+            opacity: 0.9;
+            transform: scale(1.05);
+        }
+
+        .profile-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .profile-icon {
+            font-size: 2rem;
+            background: white;
+            padding: 12px;
+            border-radius: 50%;
+            color: #007bff;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .dashboard-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="dashboard-header">
+            <div>
+                <h1><i class="fas fa-user-md"></i> Doctor Dashboard</h1>
+                <p>Welcome back, Dr. {{ doctor_name }}</p>
+            </div>
+            <div class="profile-section">
+                <i class="fas fa-user-circle profile-icon"></i>
+                <a href="{{ url_for('logout') }}" class="btn" style="background: #6c757d; color: white;">Logout</a>
+            </div>
+        </div>
+
+        <h2><i class="fas fa-calendar-alt"></i> Your Appointments</h2>
+        <div class="appointments-container">
+            {% for appointment in appointments %}
+            <div class="appointment-card">
+                <div class="status-badge {{ appointment.status }}">{{ appointment.status|title }}</div>
+                <h3><i class="fas fa-user-injured"></i> {{ appointment.username }}</h3>
+                <p><i class="fas fa-clock"></i> {{ appointment.slot }}</p>
+                
+                <div class="action-buttons">
+                    {% if appointment.status == 'pending' %}
+                        <a href="{{ url_for('confirm_appointment', appointment_id=appointment.id) }}" 
+                           class="btn btn-confirm"><i class="fas fa-check"></i> Confirm</a>
+                        <a href="{{ url_for('decline_appointment', appointment_id=appointment.id) }}" 
+                           class="btn btn-decline"><i class="fas fa-times"></i> Decline</a>
+                    {% endif %}
+                    {% if appointment.status == 'confirmed' %}
+                        <a href="{{ url_for('doctor_cancel_appointment', appointment_id=appointment.id) }}" 
+                           class="btn btn-cancel"><i class="fas fa-ban"></i> Cancel</a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

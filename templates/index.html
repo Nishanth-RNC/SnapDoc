@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="hero-section" style="text-align: center; padding: 80px 20px;">
+    <h1 style="font-size: 3rem; margin-bottom: 20px; color: var(--primary);">
+        <i class="fas fa-heartbeat"></i> Welcome to SnapDoc
+    </h1>
+    <p style="font-size: 1.2rem; margin-bottom: 40px; max-width: 700px; margin-left: auto; margin-right: auto;">
+        Your trusted platform connecting patients with healthcare professionals. Book appointments, get medical advice, and manage your health records all in one place.
+    </p>
+    <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+        <a href="{{ url_for('login') }}" class="btn btn-primary" style="padding: 15px 30px;">
+            <i class="fas fa-sign-in-alt"></i> Login
+        </a>
+        <a href="{{ url_for('signup') }}" class="btn btn-secondary" style="padding: 15px 30px;">
+            <i class="fas fa-user-plus"></i> Sign Up
+        </a>
+    </div>
+</div>
+
+<div class="features" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 60px;">
+    <div class="card">
+        <div style="font-size: 2.5rem; color: var(--primary); margin-bottom: 15px;">
+            <i class="fas fa-calendar-check"></i>
+        </div>
+        <h3 style="margin-bottom: 15px;">Easy Appointments</h3>
+        <p>Book appointments with specialists in your area with just a few clicks.</p>
+    </div>
+    
+    <div class="card">
+        <div style="font-size: 2.5rem; color: var(--primary); margin-bottom: 15px;">
+            <i class="fas fa-robot"></i>
+        </div>
+        <h3 style="margin-bottom: 15px;">AI Health Assistant</h3>
+        <p>Get preliminary medical advice from our advanced AI assistant.</p>
+    </div>
+    
+    <div class="card">
+        <div style="font-size: 2.5rem; color: var(--primary); margin-bottom: 15px;">
+            <i class="fas fa-bell"></i>
+        </div>
+        <h3 style="margin-bottom: 15px;">Smart Reminders</h3>
+        <p>Never miss an appointment with our notification system.</p>
+    </div>
+</div>
+{% endblock %}

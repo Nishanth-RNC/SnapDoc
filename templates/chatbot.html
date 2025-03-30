@@ -1,0 +1,327 @@
+{% extends "base.html" %}
+
+{% block extra_css %}
+<style>
+    .chat-container {
+        display: flex;
+        height: calc(100vh - 150px);
+    }
+    
+    .chat-history {
+        width: 250px;
+        background: white;
+        border-right: 1px solid #eee;
+        padding: 20px;
+        overflow-y: auto;
+    }
+    
+    .chat-history-title {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+        color: var(--primary);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .chat-history-list {
+        list-style: none;
+    }
+    
+    .chat-history-item {
+        padding: 12px;
+        margin-bottom: 10px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s;
+        border-left: 3px solid transparent;
+    }
+    
+    .chat-history-item:hover {
+        background: #f5f5f5;
+    }
+    
+    .chat-history-item.active {
+        background: #e3f2fd;
+        border-left: 3px solid var(--primary);
+    }
+    
+    .chat-date {
+        font-size: 0.8rem;
+        color: var(--gray);
+        margin-top: 5px;
+    }
+    
+    .chat-preview {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    .chat-main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+    }
+    
+    .chat-box {
+        flex: 1;
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        overflow-y: auto;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    
+    .message {
+        margin-bottom: 20px;
+        max-width: 80%;
+        padding: 15px;
+        border-radius: 12px;
+        position: relative;
+    }
+    
+    .user-message {
+        background: #e3f2fd;
+        margin-left: auto;
+        border-bottom-right-radius: 0;
+    }
+    
+    .bot-message {
+        background: #f5f5f5;
+        margin-right: auto;
+        border-bottom-left-radius: 0;
+    }
+    
+    .message-time {
+        font-size: 0.7rem;
+        color: var(--gray);
+        margin-top: 5px;
+        text-align: right;
+    }
+    
+    .chat-input-container {
+        display: flex;
+        gap: 10px;
+    }
+    
+    .chat-input {
+        flex: 1;
+        padding: 15px;
+        border: 2px solid #eee;
+        border-radius: 12px;
+        font-size: 1rem;
+    }
+    
+    .send-button {
+        background: var(--primary);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        padding: 0 20px;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+    
+    .send-button:hover {
+        background: var(--secondary);
+    }
+    
+    .new-chat-btn {
+        background: var(--secondary);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 12px;
+        margin-bottom: 20px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+    
+    .new-chat-btn:hover {
+        background: var(--primary);
+    }
+    
+    .bot-response {
+        line-height: 1.6;
+    }
+    
+    .bot-response strong {
+        color: var(--primary);
+    }
+    
+    .bot-response ol, .bot-response ul {
+        margin: 10px 0;
+        padding-left: 20px;
+    }
+    
+    .bot-response li {
+        margin: 8px 0;
+    }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    function formatResponse(text) {
+        // Convert markdown-like syntax to HTML
+        let html = text
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            .replace(/(\d+\.)\s(.*?)(\n|$)/g, '<li>$1 $2</li>')
+            .replace(/-\s(.*?)(\n|$)/g, '<li>$1</li>')
+            .replace(/\n/g, '<br>');
+        
+        // Group list items into proper lists
+        html = html.replace(/(<li>.*<\/li>)+/g, function(match) {
+            return '<ol>' + match + '</ol>';
+        });
+        
+        return html;
+    }
+
+    function appendMessage(text, isUser) {
+        const chatBox = document.getElementById('chatBox');
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
+        
+        const now = new Date();
+        const timeString = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+        
+        if (isUser) {
+            messageDiv.innerHTML = `
+                <div>${text}</div>
+                <div class="message-time">${timeString}</div>
+            `;
+        } else {
+            messageDiv.innerHTML = `
+                <div class="bot-response">${formatResponse(text)}</div>
+                <div class="message-time">${timeString}</div>
+            `;
+        }
+        
+        chatBox.appendChild(messageDiv);
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    async function sendMessage() {
+        const input = document.getElementById('userInput');
+        const text = input.value.trim();
+        
+        if (!text) return;
+        
+        appendMessage(text, true);
+        input.value = '';
+        
+        try {
+                const response = await fetch('/analyze_symptoms', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        text: text,
+                        history_id: "{{ history_id }}"
+                    })
+                });
+            
+                const data = await response.json();
+                appendMessage(data.response, false);
+                
+                // Update chat history list
+                if ("{{ history_id }}" === "None" && data.history_id) {
+                    // Update the URL without reloading
+                    window.history.pushState({}, '', `?history_id=${data.history_id}`);
+                    // Manually add the new chat to history sidebar
+                    addNewChatToHistory(data.history_id, text);
+                    }
+            }
+    catch (error) {
+            //appendMessage('⚠️ Service unavailable. Please try again later.', false);
+        }
+    }
+
+    function handleKeyPress(event) {
+        if (event.key === 'Enter') {
+            sendMessage();
+        }
+    }
+
+    function startNewChat() {
+        window.location.href = "{{ url_for('chatbot') }}";
+    }
+
+    function loadChat(chatId) {
+        window.location.href = "{{ url_for('chatbot') }}?history_id=" + chatId;
+    }
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="chat-container">
+    <div class="chat-history">
+        <h3 class="chat-history-title">
+            <i class="fas fa-history"></i> Chat History
+        </h3>
+        <button class="new-chat-btn" onclick="startNewChat()">
+            <i class="fas fa-plus"></i> New Chat
+        </button>
+        <ul class="chat-history-list">
+            {% for chat in chatbot_history %}
+            <li class="chat-history-item {% if chat.id == history_id|int %}active{% endif %}" 
+                onclick="loadChat('{{ chat.id }}')">
+                <div class="chat-preview">
+                    {% if chat.conversation and chat.conversation|length > 0 %}
+                        {{ chat.conversation[0].user[:30] }}...
+                    {% else %}
+                        Empty chat
+                    {% endif %}
+                </div>
+                <div class="chat-date">
+                    {{ chat.timestamp }}
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    
+    <div class="chat-main">
+        <div class="chat-box" id="chatBox">
+            {% if history %}
+                {% for entry in history %}
+                    <div class="message user-message">
+                        <div>{{ entry.user }}</div>
+                        <div class="message-time">Now</div>
+                    </div>
+                    <div class="message bot-message">
+                        <div class="bot-response">{{ entry.bot|safe }}</div>
+                        <div class="message-time">Now</div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="message bot-message">
+                    <div class="bot-response">
+                        <strong>Hello!</strong> I'm your health assistant. Please describe your symptoms 
+                        (e.g., "I have a headache and fever for 2 days").
+                    </div>
+                    <div class="message-time">Now</div>
+                </div>
+            {% endif %}
+        </div>
+        
+        <div class="chat-input-container">
+            <input type="text" id="userInput" class="chat-input" 
+                   placeholder="Describe your symptoms..." onkeypress="handleKeyPress(event)">
+            <button class="send-button" onclick="sendMessage()">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+</div>
+{% endblock %}

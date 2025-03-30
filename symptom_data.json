@@ -1,0 +1,434 @@
+{
+    "headache": {
+        "conditions": ["Migraine", "Tension headache", "Sinusitis", "Dehydration"],
+        "advice": "Take over-the-counter pain relievers, rest in a quiet, dark room, and stay hydrated."
+    },
+    "head ache": {
+        "conditions": ["Migraine", "Tension headache", "Sinusitis", "Dehydration"],
+        "advice": "Take over-the-counter pain relievers, rest in a quiet, dark room, and stay hydrated."
+    },
+    "fever": {
+        "conditions": ["Viral infection", "Flu", "Common cold", "COVID-19"],
+        "advice": "Rest, stay hydrated, and monitor your temperature. If fever persists, consult a doctor."
+    },
+    "chest pain": {
+        "conditions": ["Angina", "Heartburn", "Muscle strain", "Panic attack"],
+        "advice": "If the pain is severe or accompanied by shortness of breath, seek immediate medical attention."
+    },
+    "nausea": {
+        "conditions": ["Food poisoning", "Gastrointestinal infection", "Pregnancy", "Motion sickness"],
+        "advice": "Stay hydrated, avoid solid foods, and rest. If symptoms persist, consult a doctor."
+    },
+    "vomiting": {
+        "conditions": ["Food poisoning", "Gastroenteritis", "Pregnancy", "Migraine"],
+        "advice": "Stay hydrated with small sips of water or electrolyte solutions. Avoid solid foods until symptoms subside."
+    },
+    "dizziness": {
+        "conditions": ["Low blood pressure", "Dehydration", "Inner ear infection", "Anemia"],
+        "advice": "Sit or lie down immediately. Stay hydrated and avoid sudden movements."
+    },
+    "fatigue": {
+        "conditions": ["Anemia", "Sleep deprivation", "Chronic fatigue syndrome", "Depression"],
+        "advice": "Ensure adequate sleep, maintain a balanced diet, and consult a doctor if fatigue persists."
+    },
+    "cough": {
+        "conditions": ["Common cold", "Flu", "Bronchitis", "Asthma"],
+        "advice": "Stay hydrated, use cough drops, and avoid irritants like smoke. If coughing persists, consult a doctor."
+    },
+    "sore throat": {
+        "conditions": ["Strep throat", "Common cold", "Flu", "Tonsillitis"],
+        "advice": "Gargle with warm salt water, stay hydrated, and rest. If symptoms persist, consult a doctor."
+    },
+    "shortness of breath": {
+        "conditions": ["Asthma", "Pneumonia", "Anxiety", "Heart failure"],
+        "advice": "Sit upright, try to remain calm, and seek immediate medical attention if breathing difficulty worsens."
+    },
+    "abdominal pain": {
+        "conditions": ["Indigestion", "Appendicitis", "Irritable bowel syndrome", "Food poisoning"],
+        "advice": "Avoid solid foods, stay hydrated, and consult a doctor if pain is severe or persistent."
+    },
+    "diarrhea": {
+        "conditions": ["Gastroenteritis", "Food poisoning", "Irritable bowel syndrome", "Lactose intolerance"],
+        "advice": "Stay hydrated with electrolyte solutions, avoid dairy and fatty foods, and rest."
+    },
+    "constipation": {
+        "conditions": ["Dehydration", "Low fiber diet", "Irritable bowel syndrome", "Medication side effect"],
+        "advice": "Increase fiber intake, drink plenty of water, and exercise regularly."
+    },
+    "back pain": {
+        "conditions": ["Muscle strain", "Herniated disc", "Arthritis", "Kidney infection"],
+        "advice": "Apply heat or ice packs, take over-the-counter pain relievers, and avoid heavy lifting."
+    },
+    "joint pain": {
+        "conditions": ["Arthritis", "Gout", "Lupus", "Injury"],
+        "advice": "Rest the affected joint, apply ice packs, and take over-the-counter pain relievers."
+    },
+    "muscle pain": {
+        "conditions": ["Overexertion", "Fibromyalgia", "Infections", "Dehydration"],
+        "advice": "Rest, apply heat or ice packs, and take over-the-counter pain relievers."
+    },
+    "rash": {
+        "conditions": ["Allergic reaction", "Eczema", "Psoriasis", "Contact dermatitis"],
+        "advice": "Avoid scratching, apply a soothing lotion, and consult a doctor if the rash worsens."
+    },
+    "itchy skin": {
+        "conditions": ["Allergic reaction", "Eczema", "Dry skin", "Insect bites"],
+        "advice": "Apply a moisturizer or anti-itch cream, avoid scratching, and consult a doctor if itching persists."
+    },
+    "swelling": {
+        "conditions": ["Edema", "Allergic reaction", "Injury", "Infection"],
+        "advice": "Elevate the affected area, apply ice packs, and consult a doctor if swelling worsens."
+    },
+    "red eyes": {
+        "conditions": ["Conjunctivitis", "Allergies", "Dry eye syndrome", "Eye strain"],
+        "advice": "Use artificial tears, avoid rubbing your eyes, and consult a doctor if symptoms persist."
+    },
+    "blurred vision": {
+        "conditions": ["Eye strain", "Diabetes", "Migraine", "Cataracts"],
+        "advice": "Rest your eyes, avoid screens, and consult an eye doctor if vision problems persist."
+    },
+    "ear pain": {
+        "conditions": ["Ear infection", "Swimmer's ear", "Earwax buildup", "Sinus infection"],
+        "advice": "Avoid inserting objects into your ear, use over-the-counter pain relievers, and consult a doctor if pain persists."
+    },
+    "toothache": {
+        "conditions": ["Cavity", "Gum disease", "Tooth abscess", "Tooth sensitivity"],
+        "advice": "Rinse your mouth with warm salt water, avoid chewing on the affected side, and consult a dentist."
+    },
+    "sneezing": {
+        "conditions": ["Allergies", "Common cold", "Flu", "Irritants"],
+        "advice": "Avoid allergens, use antihistamines, and stay hydrated."
+    },
+    "runny nose": {
+        "conditions": ["Common cold", "Flu", "Allergies", "Sinus infection"],
+        "advice": "Use a saline nasal spray, stay hydrated, and rest."
+    },
+    "congestion": {
+        "conditions": ["Common cold", "Flu", "Sinus infection", "Allergies"],
+        "advice": "Use a humidifier, stay hydrated, and take decongestants if necessary."
+    },
+    "loss of appetite": {
+        "conditions": ["Stress", "Depression", "Infection", "Medication side effect"],
+        "advice": "Eat small, frequent meals, stay hydrated, and consult a doctor if appetite loss persists."
+    },
+    "weight loss": {
+        "conditions": ["Hyperthyroidism", "Diabetes", "Cancer", "Depression"],
+        "advice": "Consult a doctor to determine the underlying cause and receive appropriate treatment."
+    },
+    "weight gain": {
+        "conditions": ["Hypothyroidism", "Polycystic ovary syndrome", "Depression", "Medication side effect"],
+        "advice": "Maintain a balanced diet, exercise regularly, and consult a doctor if weight gain is unexplained."
+    },
+    "insomnia": {
+        "conditions": ["Stress", "Anxiety", "Depression", "Caffeine intake"],
+        "advice": "Establish a regular sleep schedule, avoid caffeine before bed, and consult a doctor if insomnia persists."
+    },
+    "excessive sweating": {
+        "conditions": ["Hyperhidrosis", "Anxiety", "Menopause", "Infections"],
+        "advice": "Use antiperspirants, wear breathable clothing, and consult a doctor if sweating is excessive."
+    },
+    "chills": {
+        "conditions": ["Fever", "Infection", "Hypothermia", "Anemia"],
+        "advice": "Stay warm, rest, and monitor your temperature. If chills persist, consult a doctor."
+    },
+    "night sweats": {
+        "conditions": ["Menopause", "Infections", "Cancer", "Medication side effect"],
+        "advice": "Use breathable bedding, keep your room cool, and consult a doctor if night sweats persist."
+    },
+    "frequent urination": {
+        "conditions": ["Urinary tract infection", "Diabetes", "Prostate issues", "Overactive bladder"],
+        "advice": "Stay hydrated, avoid caffeine and alcohol, and consult a doctor if symptoms persist."
+    },
+    "painful urination": {
+        "conditions": ["Urinary tract infection", "Kidney stones", "Sexually transmitted infections", "Bladder infection"],
+        "advice": "Drink plenty of water, avoid irritants, and consult a doctor if pain persists."
+    },
+    "blood in urine": {
+        "conditions": ["Urinary tract infection", "Kidney stones", "Bladder cancer", "Kidney infection"],
+        "advice": "Seek immediate medical attention to determine the cause."
+    },
+    "blood in stool": {
+        "conditions": ["Hemorrhoids", "Gastrointestinal bleeding", "Ulcers", "Colon cancer"],
+        "advice": "Seek immediate medical attention to determine the cause."
+    },
+    "black stool": {
+        "conditions": ["Gastrointestinal bleeding", "Ulcers", "Iron supplements", "Certain foods"],
+        "advice": "Seek immediate medical attention to determine the cause."
+    },
+    "pale skin": {
+        "conditions": ["Anemia", "Low blood pressure", "Shock", "Vitamin deficiency"],
+        "advice": "Consult a doctor to determine the underlying cause and receive appropriate treatment."
+    },
+    "yellow skin": {
+        "conditions": ["Jaundice", "Liver disease", "Gallstones", "Hemolytic anemia"],
+        "advice": "Seek immediate medical attention to determine the cause."
+    },
+    "swollen lymph nodes": {
+        "conditions": ["Infection", "Cancer", "Autoimmune disease", "Allergic reaction"],
+        "advice": "Consult a doctor to determine the underlying cause and receive appropriate treatment."
+    },
+    "sore muscles": {
+        "conditions": ["Overexertion", "Fibromyalgia", "Infections", "Dehydration"],
+        "advice": "Rest, apply heat or ice packs, and take over-the-counter pain relievers."
+    },
+    "stiff neck": {
+        "conditions": ["Muscle strain", "Meningitis", "Arthritis", "Poor posture"],
+        "advice": "Apply heat or ice packs, take over-the-counter pain relievers, and avoid sudden movements."
+    },
+    "numbness": {
+        "conditions": ["Pinched nerve", "Diabetes", "Multiple sclerosis", "Stroke"],
+        "advice": "Consult a doctor to determine the underlying cause and receive appropriate treatment."
+    },
+    "tingling": {
+        "conditions": ["Pinched nerve", "Diabetes", "Multiple sclerosis", "Vitamin deficiency"],
+        "advice": "Consult a doctor to determine the underlying cause and receive appropriate treatment."
+    },
+    "weakness": {
+        "conditions": ["Anemia", "Chronic fatigue syndrome", "Diabetes", "Infections"],
+        "advice": "Rest, maintain a balanced diet, and consult a doctor if weakness persists."
+    },
+    "confusion": {
+        "conditions": ["Dehydration", "Low blood sugar", "Stroke", "Infections"],
+        "advice": "Seek immediate medical attention to determine the cause."
+    },
+    "memory loss": {
+        "conditions": ["Alzheimer's disease", "Dementia", "Depression", "Vitamin deficiency"],
+        "advice": "Consult a doctor to determine the underlying cause and receive appropriate treatment."
+    },
+    "mood swings": {
+        "conditions": ["Hormonal changes", "Depression", "Bipolar disorder", "Stress"],
+        "advice": "Maintain a healthy lifestyle, seek support, and consult a doctor if mood swings persist."
+    },
+    "anxiety": {
+        "conditions": ["Generalized anxiety disorder", "Panic disorder", "Stress", "Depression"],
+        "advice": "Practice relaxation techniques, seek support, and consult a doctor if anxiety persists."
+    },
+    "depression": {
+        "conditions": ["Major depressive disorder", "Bipolar disorder", "Chronic illness", "Grief"],
+        "advice": "Seek support from loved ones, consider therapy, and consult a doctor for treatment options."
+    },
+    "irritability": {
+        "conditions": ["Stress", "Anxiety", "Depression", "Hormonal changes"],
+        "advice": "Practice relaxation techniques, maintain a healthy lifestyle, and consult a doctor if irritability persists."
+    },
+    "hair loss": {
+        "conditions": ["Genetics", "Hormonal changes", "Stress", "Nutritional deficiencies"],
+        "advice": "Maintain a balanced diet, avoid harsh hair treatments, and consult a doctor if hair loss is excessive."
+    },
+    "dry skin": {
+        "conditions": ["Dehydration", "Eczema", "Psoriasis", "Weather changes"],
+        "advice": "Use a moisturizer, stay hydrated, and avoid hot showers."
+    },
+    "acne": {
+        "conditions": ["Hormonal changes", "Poor skincare", "Diet", "Stress"],
+        "advice": "Maintain a regular skincare routine, avoid touching your face, and consult a dermatologist if acne persists."
+    },
+    "bloating": {
+        "conditions": ["Indigestion", "Irritable bowel syndrome", "Food intolerance", "Constipation"],
+        "advice": "Avoid gas-producing foods, eat smaller meals, and consult a doctor if bloating persists."
+    },
+    "heartburn": {
+        "conditions": ["Acid reflux", "Hiatal hernia", "Pregnancy", "Diet"],
+        "advice": "Avoid spicy and fatty foods, eat smaller meals, and consult a doctor if heartburn persists."
+    },
+    "bad breath": {
+        "conditions": ["Poor oral hygiene", "Gum disease", "Dry mouth", "Diet"],
+        "advice": "Brush and floss regularly, stay hydrated, and consult a dentist if bad breath persists."
+    },
+    "bleeding gums": {
+        "conditions": ["Gum disease", "Vitamin deficiency", "Poor oral hygiene", "Medication side effect"],
+        "advice": "Brush and floss regularly, use a soft toothbrush, and consult a dentist if bleeding persists."
+    },
+    "mouth sores": {
+        "conditions": ["Canker sores", "Cold sores", "Vitamin deficiency", "Infections"],
+        "advice": "Avoid spicy and acidic foods, use a soothing mouthwash, and consult a doctor if sores persist."
+    },
+    "hoarseness": {
+        "conditions": ["Laryngitis", "Acid reflux", "Overuse of voice", "Allergies"],
+        "advice": "Rest your voice, stay hydrated, and consult a doctor if hoarseness persists."
+    },
+    "wheezing": {
+        "conditions": ["Asthma", "Allergies", "Bronchitis", "Pneumonia"],
+        "advice": "Use a bronchodilator if prescribed, avoid allergens, and consult a doctor if wheezing persists."
+    },
+    "snoring": {
+        "conditions": ["Sleep apnea", "Nasal congestion", "Obesity", "Alcohol consumption"],
+        "advice": "Sleep on your side, avoid alcohol before bed, and consult a doctor if snoring is severe."
+    },
+    "sleep apnea": {
+        "conditions": ["Obstructive sleep apnea", "Obesity", "Nasal congestion", "Genetics"],
+        "advice": "Use a CPAP machine if prescribed, lose weight if necessary, and consult a doctor for treatment options."
+    },
+    "restless legs": {
+        "conditions": ["Restless legs syndrome", "Iron deficiency", "Pregnancy", "Medication side effect"],
+        "advice": "Avoid caffeine, exercise regularly, and consult a doctor if symptoms persist."
+    },
+    "cold hands and feet": {
+        "conditions": ["Poor circulation", "Raynaud's disease", "Hypothyroidism", "Anemia"],
+        "advice": "Keep warm, avoid smoking, and consult a doctor if symptoms persist."
+    },
+    "hot flashes": {
+        "conditions": ["Menopause", "Hormonal changes", "Medication side effect", "Anxiety"],
+        "advice": "Dress in layers, avoid triggers like caffeine, and consult a doctor if hot flashes are severe."
+    },
+    "irregular periods": {
+        "conditions": ["Polycystic ovary syndrome", "Hormonal imbalance", "Stress", "Thyroid issues"],
+        "advice": "Maintain a healthy lifestyle, track your cycle, and consult a doctor if irregularities persist."
+    },
+    "heavy periods": {
+        "conditions": ["Fibroids", "Hormonal imbalance", "Endometriosis", "Medication side effect"],
+        "advice": "Use iron supplements if necessary, track your cycle, and consult a doctor if bleeding is excessive."
+    },
+    "missed periods": {
+        "conditions": ["Pregnancy", "Stress", "Polycystic ovary syndrome", "Thyroid issues"],
+        "advice": "Take a pregnancy test, reduce stress, and consult a doctor if periods are consistently missed."
+    },
+    "vaginal discharge": {
+        "conditions": ["Yeast infection", "Bacterial vaginosis", "Sexually transmitted infections", "Hormonal changes"],
+        "advice": "Maintain good hygiene, avoid douching, and consult a doctor if discharge is abnormal."
+    },
+    "vaginal itching": {
+        "conditions": ["Yeast infection", "Bacterial vaginosis", "Allergic reaction", "Irritants"],
+        "advice": "Avoid irritants, wear breathable underwear, and consult a doctor if itching persists."
+    },
+    "pain during sex": {
+        "conditions": ["Vaginal dryness", "Infections", "Endometriosis", "Psychological factors"],
+        "advice": "Use lubricants, communicate with your partner, and consult a doctor if pain persists."
+    },
+    "erectile dysfunction": {
+        "conditions": ["Stress", "Diabetes", "Cardiovascular disease", "Psychological factors"],
+        "advice": "Maintain a healthy lifestyle, reduce stress, and consult a doctor for treatment options."
+    },
+    "low libido": {
+        "conditions": ["Stress", "Depression", "Hormonal imbalance", "Medication side effect"],
+        "advice": "Maintain a healthy lifestyle, communicate with your partner, and consult a doctor if low libido persists."
+    },
+    "testicular pain": {
+        "conditions": ["Testicular torsion", "Epididymitis", "Injury", "Infection"],
+        "advice": "Seek immediate medical attention to determine the cause."
+    },
+    "breast pain": {
+        "conditions": ["Hormonal changes", "Fibrocystic breasts", "Infection", "Injury"],
+        "advice": "Wear a supportive bra, apply warm compresses, and consult a doctor if pain persists."
+    },
+    "lump in breast": {
+        "conditions": ["Fibroadenoma", "Cyst", "Breast cancer", "Infection"],
+        "advice": "Seek immediate medical attention to determine the cause."
+    },
+    "nipple discharge": {
+        "conditions": ["Hormonal changes", "Infection", "Breast cancer", "Medication side effect"],
+        "advice": "Consult a doctor to determine the underlying cause and receive appropriate treatment."
+    },
+    "swollen ankles": {
+        "conditions": ["Edema", "Heart failure", "Kidney disease", "Pregnancy"],
+        "advice": "Elevate your legs, reduce salt intake, and consult a doctor if swelling persists."
+    },
+    "leg cramps": {
+        "conditions": ["Dehydration", "Electrolyte imbalance", "Overexertion", "Poor circulation"],
+        "advice": "Stretch regularly, stay hydrated, and consult a doctor if cramps are frequent."
+    },
+    "varicose veins": {
+        "conditions": ["Poor circulation", "Genetics", "Pregnancy", "Obesity"],
+        "advice": "Elevate your legs, wear compression stockings, and consult a doctor if symptoms worsen."
+    },
+    "nosebleed": {
+        "conditions": ["Dry air", "Injury", "High blood pressure", "Nasal infections"],
+        "advice": "Sit upright, pinch your nose, and seek medical attention if bleeding doesn't stop."
+    },
+    "sensitivity to light": {
+        "conditions": ["Migraine", "Eye infection", "Corneal abrasion", "Meningitis"],
+        "advice": "Wear sunglasses, rest your eyes, and consult a doctor if sensitivity persists."
+    },
+    "double vision": {
+        "conditions": ["Eye strain", "Diabetes", "Stroke", "Cataracts"],
+        "advice": "Rest your eyes, avoid screens, and consult an eye doctor if double vision persists."
+    },
+    "ringing in ears": {
+        "conditions": ["Tinnitus", "Hearing loss", "Ear infection", "Medication side effect"],
+        "advice": "Avoid loud noises, reduce stress, and consult a doctor if ringing persists."
+    },
+    "loss of taste": {
+        "conditions": ["COVID-19", "Sinus infection", "Vitamin deficiency", "Neurological issues"],
+        "advice": "Stay hydrated, avoid smoking, and consult a doctor if loss of taste persists."
+    },
+    "loss of smell": {
+        "conditions": ["COVID-19", "Sinus infection", "Nasal polyps", "Neurological issues"],
+        "advice": "Stay hydrated, avoid irritants, and consult a doctor if loss of smell persists."
+    },
+    "difficulty swallowing": {
+        "conditions": ["Sore throat", "Esophageal issues", "Neurological issues", "Infection"],
+        "advice": "Eat soft foods, stay hydrated, and consult a doctor if difficulty swallowing persists."
+    },
+    "hiccups": {
+        "conditions": ["Irritation of the diaphragm", "Overeating", "Stress", "Medication side effect"],
+        "advice": "Hold your breath, drink water, and consult a doctor if hiccups persist for more than 48 hours."
+    },
+    "belching": {
+        "conditions": ["Indigestion", "Acid reflux", "Overeating", "Swallowing air"],
+        "advice": "Eat slowly, avoid carbonated drinks, and consult a doctor if belching is excessive."
+    },
+    "flatulence": {
+        "conditions": ["Indigestion", "Food intolerance", "Irritable bowel syndrome", "Overeating"],
+        "advice": "Avoid gas-producing foods, eat smaller meals, and consult a doctor if flatulence is excessive."
+    },
+    "bad taste in mouth": {
+        "conditions": ["Poor oral hygiene", "Gum disease", "Acid reflux", "Medication side effect"],
+        "advice": "Brush and floss regularly, stay hydrated, and consult a doctor if the bad taste persists."
+    },
+    "metallic taste in mouth": {
+        "conditions": ["Medication side effect", "Pregnancy", "Gum disease", "Neurological issues"],
+        "advice": "Stay hydrated, maintain good oral hygiene, and consult a doctor if the metallic taste persists."
+    },
+    "dry mouth": {
+        "conditions": ["Dehydration", "Medication side effect", "Diabetes", "Sjogren's syndrome"],
+        "advice": "Stay hydrated, chew sugar-free gum, and consult a doctor if dry mouth persists."
+    },
+    "excessive thirst": {
+        "conditions": ["Diabetes", "Dehydration", "Kidney disease", "Medication side effect"],
+        "advice": "Stay hydrated, monitor your blood sugar, and consult a doctor if excessive thirst persists."
+    },
+    "frequent infections": {
+        "conditions": ["Weakened immune system", "Diabetes", "HIV/AIDS", "Nutritional deficiencies"],
+        "advice": "Maintain a healthy lifestyle, eat a balanced diet, and consult a doctor if infections are frequent."
+    },
+    "slow healing wounds": {
+        "conditions": ["Diabetes", "Poor circulation", "Nutritional deficiencies", "Infections"],
+        "advice": "Keep wounds clean, eat a balanced diet, and consult a doctor if healing is slow."
+    },
+    "bruising easily": {
+        "conditions": ["Vitamin deficiency", "Blood disorders", "Medication side effect", "Aging"],
+        "advice": "Eat a balanced diet, avoid injury, and consult a doctor if bruising is excessive."
+    },
+    "swollen joints": {
+        "conditions": ["Arthritis", "Gout", "Injury", "Infections"],
+        "advice": "Rest the affected joint, apply ice packs, and consult a doctor if swelling persists."
+    },
+    "stiffness": {
+        "conditions": ["Arthritis", "Fibromyalgia", "Injury", "Infections"],
+        "advice": "Stretch regularly, apply heat or ice packs, and consult a doctor if stiffness persists."
+    },
+    "tremors": {
+        "conditions": ["Essential tremor", "Parkinson's disease", "Anxiety", "Medication side effect"],
+        "advice": "Reduce stress, avoid caffeine, and consult a doctor if tremors worsen."
+    },
+    "seizures": {
+        "conditions": ["Epilepsy", "Head injury", "Stroke", "Infections"],
+        "advice": "Seek immediate medical attention to determine the cause."
+    },
+    "hallucinations": {
+        "conditions": ["Schizophrenia", "Dementia", "Substance abuse", "Neurological issues"],
+        "advice": "Seek immediate medical attention to determine the cause."
+    },
+    "delusions": {
+        "conditions": ["Schizophrenia", "Bipolar disorder", "Dementia", "Substance abuse"],
+        "advice": "Seek immediate medical attention to determine the cause."
+    },
+    "paranoia": {
+        "conditions": ["Schizophrenia", "Bipolar disorder", "Substance abuse", "Anxiety"],
+        "advice": "Seek immediate medical attention to determine the cause."
+    },
+    "suicidal thoughts": {
+        "conditions": ["Depression", "Bipolar disorder", "Substance abuse", "Trauma"],
+        "advice": "Seek immediate help from a mental health professional or call a crisis hotline."
+    }
+}
